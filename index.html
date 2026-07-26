@@ -18,28 +18,6 @@
         tailwind.config = { theme: { extend: { maxWidth:{ container:'1280px' } } } };
     </script>
 
-    <!--
-      GA4: แนะนำตั้งค่า GA4 Configuration Tag ไว้ใน GTM แทน
-      ถ้าต้องการยิง GA4 ตรงไม่ผ่าน GTM ให้เอา comment ด้านล่างออกและใส่ Measurement ID จริง
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-      </script>
-    -->
-
-    <!-- Microsoft Clarity -->
-    <script type="text/javascript">
-        (function(c,l,a,r,i,t,y){
-            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=gtm";
-            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-        })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
-    </script>
-    <!-- End Microsoft Clarity -->
-
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap');
 
@@ -149,8 +127,8 @@
 
     <div class="max-w-container mx-auto px-4 pt-4">
         <div class="demo-note">
-            <strong>เว็บทดสอบเครื่องมือวิเคราะห์</strong> — GTM ใช้ container จริง <code>GTM-5589B2GS</code> แล้ว
-            ส่วน GA4 (<code>G-XXXXXXXXXX</code>) และ Clarity (<code>CLARITY_PROJECT_ID</code>) ยังเป็น placeholder รอ ID จริง
+            <strong>เว็บทดสอบเครื่องมือวิเคราะห์</strong> — ฝังแค่ GTM container <code>GTM-5589B2GS</code> ไว้ในโค้ด
+            ส่วน GA4 และ Microsoft Clarity ให้ไปตั้งค่าเป็น Tag ภายใน GTM ทีหลัง (ไม่ต้องแก้โค้ดหน้านี้อีก)
         </div>
     </div>
 
