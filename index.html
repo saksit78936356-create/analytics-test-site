@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saksit789 — ร้านเบอร์มงคล (หน้าแรก)</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <script>
+        tailwind.config = { theme: { extend: { maxWidth:{ container:'1280px' } } } };
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    <!-- End Google Tag Manager -->
+
+    <!--
+      GA4: แนะนำตั้งค่า GA4 Configuration Tag ไว้ใน GTM แทน
+      ถ้าต้องการยิง GA4 ตรงไม่ผ่าน GTM ให้เอา comment ด้านล่างออกและใส่ Measurement ID จริง
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+      </script>
+    -->
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=gtm";
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "CLARITY_PROJECT_ID");
+    </script>
+    <!-- End Microsoft Clarity -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700;800&family=Prompt:wght@300;400;500;600;700&display=swap');
+
+        :root {
+          --gold-50:  #FBF3D9; --gold-100: #F9EEC1; --gold-200: #F5D98B; --gold-300: #EFD07F;
+          --gold-400: #E4BD5F; --gold-500: #D2A247; --gold-600: #C49332; --gold-700: #B68438; --gold-800: #8A6520;
+          --ink-900: #0A0A0A; --ink-800: #141414; --ink-700: #2A2724; --ink-500: #53504B; --ink-400: #7A756D; --ink-300: #999690;
+          --line-200: #EAE0CE; --line-100: #EFEAE1;
+          --surface-card:  #FFFFFF; --surface-panel: #F9F8F7; --surface-tile:  #FDFAF5;
+          --bg-base: #FAF8F3; --bg-alt:  #F1EDE6;
+          --success: #E4BD5F; --success-bg: #EAF9F0; --danger: #E23B3B;
+          --focus-ring: #E4BD5F; --nav-link: #CCA16E; --on-gold: #3A2A08;
+          --on-ink: #F3EAD0; --on-ink-muted: #B9AE8C; --footer-text: #ECECEC;
+          --grad-gold: linear-gradient(135deg, #F5D98B 0%, #E4BD5F 45%, #C49332 78%, #B68438 100%);
+          --grad-gold-text: linear-gradient(180deg, #F3D98A 0%, #D2A247 55%, #A9782B 100%);
+          --grad-gold-hero: linear-gradient(180deg, #dfc888 0%, #BD8D22 100%);
+          --grad-hero: radial-gradient(120% 80% at 50% 0%, #FFFDF8 0%, #F7F1E6 55%, #F1E9D8 100%);
+          --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 24px; --radius-pill: 999px;
+          --shadow-sm: 0 2px 6px rgba(90,70,20,.08);
+          --shadow-card: 0 6px 18px rgba(120,90,30,.10);
+          --shadow-lg: 0 12px 32px rgba(120,90,30,.14);
+          --shadow-gold: 0 8px 20px rgba(198,150,50,.35);
+          --font-display: "Kanit","Prompt",system-ui,sans-serif;
+          --font-body: "Prompt","IBM Plex Sans Thai","Sarabun",system-ui,sans-serif;
+          --font-num: "Kanit","Prompt",ui-sans-serif;
+          --ease-standard: cubic-bezier(.4,0,.2,1); --dur-fast: 120ms; --dur-base: 200ms;
+        }
+
+        body { background-color: var(--bg-base); color: var(--ink-700); font-family: var(--font-body); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        h1,h2,h3,h4 { font-family: var(--font-display); line-height: 1.25; }
+        .tnum { font-variant-numeric: tabular-nums; }
+        .gold-text { background: var(--grad-gold-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; font-weight:600; border-radius:var(--radius-md); padding:0 1.5rem; min-height:48px; cursor:pointer; transition:transform var(--dur-base) var(--ease-standard); border:none; text-decoration:none; }
+        .btn--gold { background-image: var(--grad-gold); color: var(--on-gold); box-shadow: var(--shadow-gold), inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 var(--gold-800); }
+        .btn--gold:hover { transform: translateY(-1px); }
+        .btn--outline { background-color: var(--surface-card); color: var(--gold-700); border: 1.5px solid var(--gold-500); }
+        .btn--outline:hover { background-color: var(--gold-50); }
+        .btn.btn--lg { padding: 0 2rem; min-height: 56px; font-size: 1.0625rem; }
+        @media (max-width:639px){ .btn.btn--lg{ min-height:44px; font-size:.9rem; } }
+
+        .filter-icon { color: var(--gold-700); display:inline-flex; align-items:center; }
+
+        .select { width:100%; height:44px; padding:0 40px 0 12px; background-color:var(--surface-card); color:var(--ink-700); border:1.5px solid var(--line-200); border-radius:var(--radius-md); appearance:none; -webkit-appearance:none;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A756D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+            background-repeat:no-repeat; background-position:right 12px center; background-size:16px 16px; }
+        .select:focus{ outline:none; border-color:var(--gold-400); box-shadow:0 0 0 3px var(--focus-ring); }
+        .field { width:100%; height:44px; padding:0 12px; background-color:var(--surface-card); color:var(--ink-700); border:1.5px solid var(--line-200); border-radius:var(--radius-md); }
+        .field::placeholder{ color:var(--ink-300); }
+        .field:focus{ outline:none; border-color:var(--gold-400); box-shadow:0 0 0 3px var(--focus-ring); }
+        @media (max-width:639px){ .select,.field{ height:38px; font-size:.8rem; } }
+
+        .digit { text-align:center; font-family:var(--font-num); font-weight:700; color:var(--ink-700); background-color:var(--surface-card); border:1.5px solid var(--line-200); border-radius:var(--radius-sm); transition:border-color var(--dur-fast) var(--ease-standard); }
+        .digit:focus{ outline:none; border-color:var(--gold-400); box-shadow:0 0 0 3px var(--focus-ring); }
+        .digit[readonly]{ background-color:var(--bg-alt); color:var(--ink-500); }
+        .digit.digit--pos{ height:42px; font-size:1rem; }
+        @media (min-width:640px){ .digit.digit--pos{ height:48px; font-size:1.0625rem; } }
+
+        .chip { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:var(--radius-pill); background-color:var(--surface-card); border:1px solid var(--line-200); font-family:var(--font-num); font-weight:700; font-size:.8125rem; color:var(--ink-700); cursor:pointer; transition:border-color var(--dur-fast) var(--ease-standard); }
+        @media (min-width:640px){ .chip{ width:38px; height:38px; font-size:.875rem; } }
+        .chip:hover{ border-color:var(--gold-300); }
+        .chip.is-like{ background-image:var(--grad-gold); border-color:var(--gold-500); color:var(--on-gold); box-shadow:var(--shadow-sm); }
+        .mode-tab { display:inline-flex; align-items:center; gap:8px; padding:6px 14px; border-radius:var(--radius-pill); border:1px solid transparent; font-weight:700; font-size:.875rem; color:var(--ink-400); background:transparent; cursor:pointer; }
+        @media (max-width:639px){ .mode-tab{ font-size:.75rem; padding:5px 10px; } }
+        .mode-tab.is-active{ color:var(--gold-700); background-color:var(--gold-50); border-color:var(--line-200); }
+
+        .tile { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; aspect-ratio:1/1; padding:8px; background-color:var(--surface-tile); border:1px solid var(--line-200); border-radius:var(--radius-md); color:var(--ink-700); cursor:pointer; text-align:center; transition:border-color var(--dur-base) var(--ease-standard); }
+        .tile:hover{ border-color:var(--gold-300); box-shadow:var(--shadow-sm); }
+        .tile__icon { flex:1 1 auto; min-height:0; width:100%; max-width:48px; max-height:48px; object-fit:contain; }
+        @media (min-width:640px){ .tile__icon{ max-width:60px; max-height:60px; } }
+        .tile__label { flex-shrink:0; line-height:1.15; font-size:.8125rem; font-weight:700; }
+        .tile__label.tile__label--lg{ font-size:.875rem; font-weight:800; }
+        @media (max-width:639px){ .tile__label{ font-size:.625rem; } .tile__label.tile__label--lg{ font-size:.625rem; } }
+        .tile.is-selected{ border:2px solid var(--success); }
+        .tile.is-selected::after{ content:"✓"; position:absolute; bottom:6px; right:6px; width:20px; height:20px; display:grid; place-items:center; font-size:.75rem; font-weight:700; color:#fff; background-color:var(--success); border-radius:var(--radius-pill); }
+
+        .card { position:relative; background-color:var(--surface-card); border:1px solid var(--line-100); border-radius:var(--radius-lg); box-shadow:var(--shadow-card); padding:8px; }
+        .card__number { font-family:var(--font-num); font-weight:700; font-size:1.625rem; color:var(--ink-700); text-align:center; }
+        @media (max-width:639px){ .card__number{ font-size:1.26rem; } }
+        .card__price { font-family:var(--font-num); font-weight:700; font-size:1.375rem; color:var(--gold-700); text-align:center; }
+        .card__price.is-booked{ color:var(--danger); }
+        .card__attrs { display:flex; border-top:1px dashed var(--line-200); border-bottom:1px dashed var(--line-200); }
+        .card__attrs > * { flex:1; min-width:0; text-align:center; padding:6px 0; }
+        .card__attrs > * + * { border-left:1px solid var(--line-200); }
+        .card__attr-value { font-family:var(--font-num); font-weight:700; color:var(--gold-700); }
+        .card__attr-label { font-size:.6875rem; color:var(--ink-400); margin-top:4px; }
+        .grade { font-family:var(--font-num); font-weight:800; color:var(--gold-700); }
+
+        .section-head { display:flex; align-items:flex-end; justify-content:space-between; gap:16px; padding-bottom:12px; margin-bottom:24px; border-bottom:2px solid var(--line-200); }
+        .section-head__title { font-family:var(--font-display); font-weight:700; font-size:1.35rem; color:var(--ink-700); }
+
+        .nav { background-color: var(--ink-900); border-bottom: 1px solid var(--gold-800); }
+        .nav__link { color: var(--nav-link); font-weight:500; font-size:.975rem; }
+        .nav__link.is-active { border-bottom:2px solid var(--nav-link); }
+
+        .footer { background-color: var(--ink-900); color: var(--footer-text); border-top:1px solid var(--gold-800); }
+
+        .demo-note{ max-width:1280px; margin:0 auto 16px; padding:12px 16px; background:var(--gold-50); border:1px solid var(--gold-400); border-radius:12px; font-size:13px; color:#5C4715; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="max-w-container mx-auto px-4 pt-4">
+        <div class="demo-note">
+            <strong>เว็บทดสอบเครื่องมือวิเคราะห์</strong> — หน้านี้ฝัง GTM / GA4 / Microsoft Clarity ไว้เป็น placeholder
+            (<code>GTM-XXXXXXX</code>, <code>G-XXXXXXXXXX</code>, <code>CLARITY_PROJECT_ID</code>) ให้แทนที่ด้วย ID จริงก่อนใช้งานจริง
+        </div>
+    </div>
+
+    <header class="nav">
+        <div class="max-w-container mx-auto px-4 h-20 flex items-center justify-between gap-4">
+            <a href="index.html" class="font-extrabold text-lg" style="color:var(--nav-link);">SAKSIT789</a>
+            <nav class="hidden lg:flex items-center gap-5">
+                <a href="index.html" class="nav__link is-active">หน้าแรก</a>
+                <a href="search-results.html" class="nav__link">เบอร์ทั้งหมด</a>
+                <a href="product-detail.html" class="nav__link">รายละเอียดเบอร์</a>
+                <a href="cart.html" class="nav__link">ตะกร้า</a>
+                <a href="contact.html" class="nav__link">ติดต่อเรา</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="py-8 sm:py-14 text-center px-4" style="background-image: var(--grad-hero);">
+        <h1 class="font-extrabold mb-3" style="font-size:clamp(2.125rem,6vw,3.5rem);">
+            ศักดิ์สิทธิ์ <span style="background-image:var(--grad-gold-hero); -webkit-background-clip:text; background-clip:text; color:transparent;">เบอร์มงคล</span>
+        </h1>
+        <p class="mb-1" style="color:var(--ink-700);">ร้านเบอร์มงคลอันดับ <span class="gold-text font-bold">1</span> ในใจลูกค้า</p>
+        <p class="text-sm mb-8" style="color:var(--ink-500);">เบอร์มงคลคัดพิเศษ ถูกต้องตามหลักศาสตร์ตัวเลข</p>
+    </section>
+
+    <section class="py-4 sm:py-10" style="background-color:var(--bg-base);">
+        <div class="max-w-container mx-auto px-3 sm:px-4">
+            <h2 class="text-xl sm:text-3xl md:text-4xl font-extrabold text-center gold-text mb-4 sm:mb-10">ค้นหาเบอร์มงคล</h2>
+
+            <div class="rounded-2xl sm:rounded-3xl p-2.5 sm:p-6 md:p-10" style="background-color:var(--surface-card); border:1px solid var(--gold-200); box-shadow:var(--shadow-card);">
+                <form id="home-search-form" data-track="search_submit" data-redirect="search-results.html" action="search-results.html" method="GET">
+                    <div class="flex flex-col lg:flex-row gap-3 sm:gap-6 lg:gap-8 items-start">
+                        <div class="w-full lg:flex-1 lg:min-w-0">
+                            <div class="flex items-center gap-2 mb-1.5 sm:mb-3">
+                                <span class="font-bold text-sm sm:text-base" style="color:var(--ink-700);">ค้นหาเบอร์ตามตำแหน่ง</span>
+                            </div>
+                            <div class="flex flex-nowrap items-center gap-1 sm:gap-2 w-full">
+                                <input type="text" value="0" readonly class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <span class="font-bold px-0.5 shrink-0" style="color:var(--ink-300);">-</span>
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <span class="font-bold px-0.5 shrink-0" style="color:var(--ink-300);">-</span>
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                                <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-[480px] lg:shrink-0 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-4">
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ราคาต่ำสุด</span></div>
+                                <select class="select" name="price_min"><option>ไม่ระบุ</option><option>500</option><option>1,000</option><option>3,000</option></select>
+                            </div>
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ราคาสูงสุด</span></div>
+                                <select class="select" name="price_max"><option>ไม่ระบุ</option><option>10,000</option><option>50,000</option></select>
+                            </div>
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">เครือข่าย</span></div>
+                                <select class="select" name="network"><option>ทั้งหมด</option><option>AIS</option><option>TRUE</option><option>DTAC</option></select>
+                            </div>
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">สถานะซิม</span></div>
+                                <select class="select" name="sim_status"><option>ทั้งหมด</option><option>ลงทะเบียนแล้ว</option><option>ยังไม่ลงทะเบียน</option></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6">
+                        <button type="submit" class="btn btn--gold btn--lg sm:w-64">ค้นหา</button>
+                        <button type="reset" class="btn btn--outline btn--lg sm:w-64">ล้างค่าทั้งหมด</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-container mx-auto px-4 py-10">
+        <div class="section-head"><span class="section-head__title">เบอร์มาใหม่</span></div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            <div class="card">
+                <div class="card__number tnum mb-1 mt-1">081-2894567</div>
+                <div class="card__attrs mb-1">
+                    <div><div class="card__attr-value">45</div><div class="card__attr-label">ผลรวม</div></div>
+                    <div><div class="card__attr-value">AIS</div><div class="card__attr-label">รายเดือน</div></div>
+                    <div><span class="grade">S+</span><div class="card__attr-label">เกรด</div></div>
+                </div>
+                <div class="card__price tnum mb-2">฿ 9,999</div>
+                <a href="product-detail.html?number=0812894567" class="btn btn--gold w-full text-sm">ดูรายละเอียด</a>
+            </div>
+            <div class="card">
+                <div class="card__number tnum mb-1 mt-1">082-2895959</div>
+                <div class="card__attrs mb-1">
+                    <div><div class="card__attr-value">59</div><div class="card__attr-label">ผลรวม</div></div>
+                    <div><div class="card__attr-value">TRUE</div><div class="card__attr-label">เติมเงิน</div></div>
+                    <div><span class="grade">A</span><div class="card__attr-label">เกรด</div></div>
+                </div>
+                <div class="card__price tnum mb-2">฿ 8,500</div>
+                <a href="product-detail.html?number=0822895959" class="btn btn--gold w-full text-sm">ดูรายละเอียด</a>
+            </div>
+            <div class="card">
+                <div class="card__number tnum mb-1 mt-1">062-3456789</div>
+                <div class="card__attrs mb-1">
+                    <div><div class="card__attr-value">42</div><div class="card__attr-label">ผลรวม</div></div>
+                    <div><div class="card__attr-value">AIS</div><div class="card__attr-label">รายเดือน</div></div>
+                    <div><span class="grade">S+</span><div class="card__attr-label">เกรด</div></div>
+                </div>
+                <div class="card__price tnum mb-2">฿ 25,500</div>
+                <a href="product-detail.html?number=0623456789" class="btn btn--gold w-full text-sm">ดูรายละเอียด</a>
+            </div>
+            <div class="card">
+                <div class="card__number tnum mb-1 mt-1">081-7896565</div>
+                <div class="card__attrs mb-1">
+                    <div><div class="card__attr-value">65</div><div class="card__attr-label">ผลรวม</div></div>
+                    <div><div class="card__attr-value">AIS</div><div class="card__attr-label">รายเดือน</div></div>
+                    <div><span class="grade">B</span><div class="card__attr-label">เกรด</div></div>
+                </div>
+                <div class="card__price is-booked tnum mb-2">จองแล้ว</div>
+                <button class="btn btn--gold w-full text-sm" disabled>สั่งซื้อ</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer py-8 text-center text-sm">Copyright © 2026 Saksit789 . All rights reserved.</footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        window.dataLayer = window.dataLayer || [];
+        document.querySelectorAll('form[data-track]').forEach(function (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var eventName = form.getAttribute('data-track');
+                var redirectTo = form.getAttribute('data-redirect') || '#';
+                dataLayer.push({ event: eventName, form_id: form.id || null, page_path: window.location.pathname });
+                setTimeout(function () { window.location.href = redirectTo; }, 200);
+            });
+        });
+    });
+    </script>
+</body>
+</html>
