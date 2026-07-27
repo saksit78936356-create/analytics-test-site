@@ -61,6 +61,26 @@
 
         .filter-icon { color: var(--gold-700); display:inline-flex; align-items:center; }
 
+        .chip { display:inline-flex; align-items:center; justify-content:center; width:32px; height:32px; border-radius:var(--radius-pill); background-color:var(--surface-card); border:1px solid var(--line-200); font-family:var(--font-num); font-weight:700; font-size:.8125rem; color:var(--ink-700); cursor:pointer; transition:border-color var(--dur-fast) var(--ease-standard); }
+        @media (min-width:640px){ .chip{ width:38px; height:38px; font-size:.875rem; } }
+        .chip:hover{ border-color:var(--gold-300); }
+        .chip.is-like{ background-image:var(--grad-gold); border-color:var(--gold-500); color:var(--on-gold); box-shadow:var(--shadow-sm); }
+        .mode-tab { display:inline-flex; align-items:center; gap:8px; padding:6px 14px; border-radius:var(--radius-pill); border:1px solid transparent; font-weight:700; font-size:.875rem; color:var(--ink-400); background:transparent; cursor:pointer; }
+        @media (max-width:639px){ .mode-tab{ font-size:.75rem; padding:5px 10px; } }
+        .mode-tab.is-active{ color:var(--gold-700); background-color:var(--gold-50); border-color:var(--line-200); }
+
+        .tile { position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; aspect-ratio:1/1; padding:8px; background-color:var(--surface-tile); border:1px solid var(--line-200); border-radius:var(--radius-md); color:var(--ink-700); cursor:pointer; text-align:center; transition:border-color var(--dur-base) var(--ease-standard); }
+        .tile:hover{ border-color:var(--gold-300); box-shadow:var(--shadow-sm); }
+        .tile__icon { flex:1 1 auto; min-height:0; width:100%; max-width:48px; max-height:48px; object-fit:contain; }
+        @media (min-width:640px){ .tile__icon{ max-width:60px; max-height:60px; } }
+        .tile__label { flex-shrink:0; line-height:1.15; font-size:.8125rem; font-weight:700; }
+        .tile__label.tile__label--lg{ font-size:.875rem; font-weight:800; }
+        @media (max-width:639px){ .tile__label{ font-size:.625rem; } .tile__label.tile__label--lg{ font-size:.625rem; } }
+        .tile.is-selected{ border:2px solid var(--success); }
+        .tile.is-selected::after{ content:"✓"; position:absolute; bottom:6px; right:6px; width:20px; height:20px; display:grid; place-items:center; font-size:.75rem; font-weight:700; color:#fff; background-color:var(--success); border-radius:var(--radius-pill); }
+
+        .filter-icon { color: var(--gold-700); display:inline-flex; align-items:center; }
+
         .select { width:100%; height:44px; padding:0 40px 0 12px; background-color:var(--surface-card); color:var(--ink-700); border:1.5px solid var(--line-200); border-radius:var(--radius-md); appearance:none; -webkit-appearance:none;
             background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A756D' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
             background-repeat:no-repeat; background-position:right 12px center; background-size:16px 16px; }
@@ -127,8 +147,9 @@
 
     <div class="max-w-container mx-auto px-4 pt-4">
         <div class="demo-note">
-            <strong>เว็บทดสอบเครื่องมือวิเคราะห์</strong> — ฝังแค่ GTM container <code>GTM-5589B2GS</code> ไว้ในโค้ด
-            ส่วน GA4 และ Microsoft Clarity ให้ไปตั้งค่าเป็น Tag ภายใน GTM ทีหลัง (ไม่ต้องแก้โค้ดหน้านี้อีก)
+            <strong>เว็บทดสอบเครื่องมือวิเคราะห์</strong> — กล่องค้นหาเต็มรูปแบบ (ตำแหน่งเลข, ราคา, เครือข่าย, สถานะซิม,
+            เลขที่ชอบ/ไม่ชอบ, ชุดเลขโปรด, กลุ่มอาชีพ, กลุ่มเลข, ผลรวม, ด้านที่ต้องการเสริม) กด "ค้นหา" แล้วเปิด Console (F12)
+            ดู <code>dataLayer</code> จะเห็นค่าที่เลือกทั้งหมดถูกส่งไปพร้อมกัน — GTM container: <code>GTM-5589B2GS</code>
         </div>
     </div>
 
@@ -158,13 +179,17 @@
             <h2 class="text-xl sm:text-3xl md:text-4xl font-extrabold text-center gold-text mb-4 sm:mb-10">ค้นหาเบอร์มงคล</h2>
 
             <div class="rounded-2xl sm:rounded-3xl p-2.5 sm:p-6 md:p-10" style="background-color:var(--surface-card); border:1px solid var(--gold-200); box-shadow:var(--shadow-card);">
-                <form id="home-search-form" data-track="search_submit" data-redirect="/search-results" action="/search-results" method="GET">
+                <form id="home-search-form" action="/search-results" method="GET">
+                    <!-- แถวบน: ตำแหน่งเลข + ราคา/เครือข่าย/สถานะซิม -->
                     <div class="flex flex-col lg:flex-row gap-3 sm:gap-6 lg:gap-8 items-start">
                         <div class="w-full lg:flex-1 lg:min-w-0">
                             <div class="flex items-center gap-2 mb-1.5 sm:mb-3">
+                                <span class="filter-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-4 h-4"><rect x="7" y="2.5" width="10" height="19" rx="2"/><line x1="10.5" y1="18.5" x2="13.5" y2="18.5"/></svg>
+                                </span>
                                 <span class="font-bold text-sm sm:text-base" style="color:var(--ink-700);">ค้นหาเบอร์ตามตำแหน่ง</span>
                             </div>
-                            <div class="flex flex-nowrap items-center gap-1 sm:gap-2 w-full">
+                            <div class="flex flex-nowrap items-center gap-1 sm:gap-2 w-full" id="position-digits">
                                 <input type="text" value="0" readonly class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
                                 <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
                                 <input type="text" maxlength="1" placeholder="x" class="digit digit--pos flex-1 min-w-0 max-w-[52px]">
@@ -181,27 +206,102 @@
                         </div>
                         <div class="w-full lg:w-[480px] lg:shrink-0 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-4">
                             <div>
-                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ราคาต่ำสุด</span></div>
+                                <div class="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                                    <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-4 h-4"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>
+                                    <span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ราคาต่ำสุด</span>
+                                </div>
                                 <select class="select" name="price_min"><option>ไม่ระบุ</option><option>500</option><option>1,000</option><option>3,000</option></select>
                             </div>
                             <div>
-                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ราคาสูงสุด</span></div>
+                                <div class="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                                    <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-4 h-4"><circle cx="12" cy="12" r="9"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="12" y1="8" x2="12" y2="16"/></svg></span>
+                                    <span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ราคาสูงสุด</span>
+                                </div>
                                 <select class="select" name="price_max"><option>ไม่ระบุ</option><option>10,000</option><option>50,000</option></select>
                             </div>
                             <div>
-                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">เครือข่าย</span></div>
+                                <div class="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                                    <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" class="w-4 h-4"><line x1="5" y1="20" x2="5" y2="15"/><line x1="10" y1="20" x2="10" y2="11"/><line x1="15" y1="20" x2="15" y2="7"/><line x1="20" y1="20" x2="20" y2="4"/></svg></span>
+                                    <span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">เครือข่าย</span>
+                                </div>
                                 <select class="select" name="network"><option>ทั้งหมด</option><option>AIS</option><option>TRUE</option><option>DTAC</option></select>
                             </div>
                             <div>
-                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">สถานะซิม</span></div>
+                                <div class="flex items-center gap-1.5 sm:gap-2 mb-1 sm:mb-2">
+                                    <span class="filter-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" class="w-4 h-4"><rect x="5" y="3" width="14" height="18" rx="2"/><rect x="9" y="12" width="6" height="6" rx="1"/><line x1="14" y1="3" x2="19" y2="8"/></svg></span>
+                                    <span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">สถานะซิม</span>
+                                </div>
                                 <select class="select" name="sim_status"><option>ทั้งหมด</option><option>ลงทะเบียนแล้ว</option><option>ยังไม่ลงทะเบียน</option></select>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-6">
+                    <hr class="my-2.5 sm:my-6" style="border-top:1px solid var(--line-200);">
+
+                    <!-- แถวกลาง: เลขที่ชอบ/ไม่ชอบ + ชุดเลขโปรด/กลุ่มอาชีพ/กลุ่มเลข/ผลรวม -->
+                    <div class="flex flex-col lg:flex-row gap-3 sm:gap-6 lg:gap-8 items-start">
+                        <div class="w-full lg:flex-1 lg:min-w-0">
+                            <div class="flex items-center gap-2 mb-1.5 sm:mb-3">
+                                <button type="button" class="mode-tab is-active" data-mode="like">เลขที่ชอบ</button>
+                                <button type="button" class="mode-tab" data-mode="dislike">เลขที่ไม่ชอบ</button>
+                            </div>
+                            <div class="flex flex-nowrap gap-1 sm:gap-2 w-full" id="digit-chips">
+                                <button type="button" class="chip is-like flex-1 min-w-0 max-w-[38px]" data-digit="0">0</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="1">1</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="2">2</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="3">3</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="4">4</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="5">5</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="6">6</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="7">7</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="8">8</button>
+                                <button type="button" class="chip flex-1 min-w-0 max-w-[38px]" data-digit="9">9</button>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-[480px] lg:shrink-0 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-2 sm:gap-4">
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ชุดเลขโปรด</span></div>
+                                <input type="text" name="favorite_set" placeholder="เช่น 789, 456, 289" class="field">
+                            </div>
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">กลุ่มอาชีพ</span></div>
+                                <select class="select" name="occupation_group"><option>ทั้งหมด</option><option>ค้าขาย / ธุรกิจ</option></select>
+                            </div>
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">กลุ่มเลข</span></div>
+                                <select class="select" name="digit_group"><option>ทั้งหมด</option><option>เลขตอง</option></select>
+                            </div>
+                            <div>
+                                <div class="mb-1 sm:mb-2"><span class="font-semibold text-xs sm:text-sm" style="color:var(--ink-700);">ผลรวม</span></div>
+                                <select class="select" name="digit_sum"><option>ทั้งหมด</option><option>ผลรวม 45</option></select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-2.5 sm:my-6" style="border-top:1px solid var(--line-200);">
+
+                    <!-- ด้านที่ต้องการเสริม (multi-select tiles) -->
+                    <h3 class="text-base sm:text-lg font-bold text-center mb-2 sm:mb-4" style="color:var(--ink-800);">ด้านที่ต้องการเสริม</h3>
+                    <div class="flex lg:grid lg:grid-cols-6 flex-nowrap lg:flex-wrap gap-2 md:gap-6 mb-4 sm:mb-8
+                                overflow-x-auto lg:overflow-visible -mx-2.5 sm:mx-0 px-2.5 sm:px-0
+                                snap-x snap-mandatory lg:snap-none" id="enhancement-tiles">
+                        <button type="button" class="tile is-selected shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="การเงิน"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-money.png" class="tile__icon"><span class="tile__label">การเงิน</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="การงาน"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-job.png" class="tile__icon"><span class="tile__label">การงาน</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="ความรัก"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-love.png" class="tile__icon"><span class="tile__label">ความรัก</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="ค้าขายดี"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-sale.png" class="tile__icon"><span class="tile__label">ค้าขายดี</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="โชคลาภ"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-lucky.png" class="tile__icon"><span class="tile__label">โชคลาภ</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="อำนาจบารมี"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-power.png" class="tile__icon"><span class="tile__label">อำนาจบารมี</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="สติปัญญา"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-iq.png" class="tile__icon"><span class="tile__label">สติปัญญา</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="สุขภาพ"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-health.png" class="tile__icon"><span class="tile__label">สุขภาพ</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="เงินก้อนโต"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-money2.png" class="tile__icon"><span class="tile__label">เงินก้อนโต</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="เบอร์มังกร789"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-789.png" class="tile__icon"><span class="tile__label tile__label--lg">เบอร์มังกร 789</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="เบอร์หงส์289"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-289.png" class="tile__icon"><span class="tile__label tile__label--lg">เบอร์หงส์ 289</span></button>
+                        <button type="button" class="tile shrink-0 w-[92px] sm:w-auto lg:w-auto snap-start" data-area="เบอร์กวนอู639"><img src="https://celebrated-bublanina-981919.netlify.app/assets/img/icons/search/search-639.png" class="tile__icon"><span class="tile__label tile__label--lg">เบอร์กวนอู 639</span></button>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
                         <button type="submit" class="btn btn--gold btn--lg sm:w-64">ค้นหา</button>
-                        <button type="reset" class="btn btn--outline btn--lg sm:w-64">ล้างค่าทั้งหมด</button>
+                        <button type="reset" class="btn btn--outline btn--lg sm:w-64" id="search-reset-btn">ล้างค่าทั้งหมด</button>
                     </div>
                 </form>
             </div>
@@ -259,6 +359,144 @@
     <script>
     document.addEventListener('DOMContentLoaded', function () {
         window.dataLayer = window.dataLayer || [];
+
+        var searchForm = document.getElementById('home-search-form');
+        if (!searchForm) { return; }
+
+        // ---------- state ----------
+        var likedDigits = new Set(['0']);   // ค่าเริ่มต้นตามดีไซน์: เลข 0 ถูกเลือกเป็น "เลขที่ชอบ" ไว้ก่อน
+        var dislikedDigits = new Set();
+        var activeMode = 'like';
+        var selectedAreas = new Set(['การเงิน']); // ค่าเริ่มต้น: การเงิน ถูกเลือกไว้ก่อน
+
+        // ---------- โหมด เลขที่ชอบ / เลขที่ไม่ชอบ ----------
+        var modeTabs = searchForm.querySelectorAll('.mode-tab');
+        var chipButtons = searchForm.querySelectorAll('#digit-chips .chip');
+
+        function renderChips() {
+            var activeSet = activeMode === 'like' ? likedDigits : dislikedDigits;
+            chipButtons.forEach(function (chip) {
+                var digit = chip.getAttribute('data-digit');
+                chip.classList.toggle('is-like', activeSet.has(digit));
+            });
+        }
+
+        modeTabs.forEach(function (tab) {
+            tab.addEventListener('click', function () {
+                modeTabs.forEach(function (t) { t.classList.remove('is-active'); });
+                tab.classList.add('is-active');
+                activeMode = tab.getAttribute('data-mode');
+                renderChips();
+            });
+        });
+
+        chipButtons.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                var digit = chip.getAttribute('data-digit');
+                var activeSet = activeMode === 'like' ? likedDigits : dislikedDigits;
+                var otherSet = activeMode === 'like' ? dislikedDigits : likedDigits;
+                if (activeSet.has(digit)) {
+                    activeSet.delete(digit);
+                } else {
+                    activeSet.add(digit);
+                    otherSet.delete(digit); // เลขเดียวจะชอบและไม่ชอบพร้อมกันไม่ได้
+                }
+                renderChips();
+            });
+        });
+
+        renderChips();
+
+        // ---------- ด้านที่ต้องการเสริม (multi-select tiles) ----------
+        var tileButtons = searchForm.querySelectorAll('#enhancement-tiles .tile');
+        tileButtons.forEach(function (tile) {
+            tile.addEventListener('click', function () {
+                var area = tile.getAttribute('data-area');
+                if (selectedAreas.has(area)) {
+                    selectedAreas.delete(area);
+                    tile.classList.remove('is-selected');
+                } else {
+                    selectedAreas.add(area);
+                    tile.classList.add('is-selected');
+                }
+            });
+        });
+
+        // ---------- ปุ่มล้างค่าทั้งหมด ----------
+        var resetBtn = document.getElementById('search-reset-btn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function () {
+                setTimeout(function () {
+                    likedDigits = new Set();
+                    dislikedDigits = new Set();
+                    selectedAreas = new Set();
+                    activeMode = 'like';
+                    modeTabs.forEach(function (t) { t.classList.remove('is-active'); });
+                    modeTabs[0].classList.add('is-active');
+                    renderChips();
+                    tileButtons.forEach(function (t) { t.classList.remove('is-selected'); });
+                }, 0);
+            });
+        }
+
+        // ---------- submit: รวมทุกตัวเลือกเข้า dataLayer + สร้าง query string จริง ----------
+        searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var digits = Array.prototype.map.call(
+                searchForm.querySelectorAll('#position-digits .digit'),
+                function (el) { return el.value ? el.value : 'x'; }
+            ).join('');
+
+            var priceMin = searchForm.querySelector('[name="price_min"]').value;
+            var priceMax = searchForm.querySelector('[name="price_max"]').value;
+            var network = searchForm.querySelector('[name="network"]').value;
+            var simStatus = searchForm.querySelector('[name="sim_status"]').value;
+            var favoriteSet = searchForm.querySelector('[name="favorite_set"]').value.trim();
+            var occupationGroup = searchForm.querySelector('[name="occupation_group"]').value;
+            var digitGroup = searchForm.querySelector('[name="digit_group"]').value;
+            var digitSum = searchForm.querySelector('[name="digit_sum"]').value;
+
+            var likedList = Array.from(likedDigits).sort().join(',');
+            var dislikedList = Array.from(dislikedDigits).sort().join(',');
+            var areasList = Array.from(selectedAreas).join(',');
+
+            var params = new URLSearchParams();
+            if (digits.replace(/x/g, '').length > 0) params.set('number', digits);
+            if (priceMin !== 'ไม่ระบุ') params.set('price_min', priceMin);
+            if (priceMax !== 'ไม่ระบุ') params.set('price_max', priceMax);
+            if (network !== 'ทั้งหมด') params.set('network', network);
+            if (simStatus !== 'ทั้งหมด') params.set('sim_status', simStatus);
+            if (likedList) params.set('like_digits', likedList);
+            if (dislikedList) params.set('dislike_digits', dislikedList);
+            if (favoriteSet) params.set('favorite_set', favoriteSet);
+            if (occupationGroup !== 'ทั้งหมด') params.set('occupation_group', occupationGroup);
+            if (digitGroup !== 'ทั้งหมด') params.set('digit_group', digitGroup);
+            if (digitSum !== 'ทั้งหมด') params.set('digit_sum', digitSum);
+            if (areasList) params.set('areas', areasList);
+
+            dataLayer.push({
+                event: 'search_submit',
+                search_number_pattern: digits,
+                search_price_min: priceMin,
+                search_price_max: priceMax,
+                search_network: network,
+                search_sim_status: simStatus,
+                search_like_digits: likedList,
+                search_dislike_digits: dislikedList,
+                search_favorite_set: favoriteSet,
+                search_occupation_group: occupationGroup,
+                search_digit_group: digitGroup,
+                search_digit_sum: digitSum,
+                search_enhancement_areas: areasList,
+                page_path: window.location.pathname
+            });
+
+            var redirectUrl = '/search-results' + (params.toString() ? ('?' + params.toString()) : '');
+            setTimeout(function () { window.location.href = redirectUrl; }, 200);
+        });
+
+        // ฟอร์มอื่นๆ ที่แค่ต้องการรู้ว่า "มีการ submit" (ไม่ต้องดึงค่าฟิลด์)
         document.querySelectorAll('form[data-track]').forEach(function (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
