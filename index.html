@@ -148,8 +148,9 @@
     <div class="max-w-container mx-auto px-4 pt-4">
         <div class="demo-note">
             <strong>เว็บทดสอบเครื่องมือวิเคราะห์</strong> — กล่องค้นหาเต็มรูปแบบ (ตำแหน่งเลข, ราคา, เครือข่าย, สถานะซิม,
-            เลขที่ชอบ/ไม่ชอบ, ชุดเลขโปรด, กลุ่มอาชีพ, กลุ่มเลข, ผลรวม, ด้านที่ต้องการเสริม) กด "ค้นหา" แล้วเปิด Console (F12)
-            ดู <code>dataLayer</code> จะเห็นค่าที่เลือกทั้งหมดถูกส่งไปพร้อมกัน — GTM container: <code>GTM-5589B2GS</code>
+            เลขที่ชอบ/ไม่ชอบ, ชุดเลขโปรด, กลุ่มอาชีพ, กลุ่มเลข, ผลรวม, ด้านที่ต้องการเสริม)
+            แตะฟิลเตอร์ตัวไหนก่อนจะยิง <code>filter_interact</code> (ครั้งแรกเท่านั้น ไม่นับซ้ำ) แล้วกด "ค้นหา" จะยิง <code>search_submit</code> ตาม —
+            เปิด Console (F12) ดู <code>dataLayer</code> ได้เลย — GTM container: <code>GTM-5589B2GS</code>
         </div>
     </div>
 
@@ -362,6 +363,38 @@
 
         var searchForm = document.getElementById('home-search-form');
         if (!searchForm) { return; }
+
+        // ---------- filter_interact: ยิงแค่ "ครั้งแรก" ที่แตะฟิลเตอร์อะไรก็ได้ ----------
+        var hasInteracted = false;
+        function markFilterInteracted(fieldName) {
+            if (hasInteracted) { return; } // กันยิงซ้ำ ต่อให้แตะฟิลเตอร์อีกกี่ครั้งก็ตาม
+            hasInteracted = true;
+            dataLayer.push({
+                event: 'filter_interact',
+                interaction_field: fieldName,
+                page_path: window.location.pathname
+            });
+        }
+
+        // ผูกกับทุกช่องในฟอร์มค้นหา: เลขตำแหน่ง, select, text input
+        searchForm.querySelectorAll('input, select').forEach(function (el) {
+            var evt = (el.tagName === 'SELECT') ? 'change' : 'input';
+            el.addEventListener(evt, function () {
+                markFilterInteracted(el.name || el.className || 'unknown_field');
+            });
+        });
+        // ผูกกับชิปเลขที่ชอบ/ไม่ชอบ และ mode tab
+        searchForm.querySelectorAll('#digit-chips .chip, .mode-tab').forEach(function (el) {
+            el.addEventListener('click', function () {
+                markFilterInteracted('digit_chip_or_mode');
+            });
+        });
+        // ผูกกับ tile ด้านที่ต้องการเสริม
+        searchForm.querySelectorAll('#enhancement-tiles .tile').forEach(function (el) {
+            el.addEventListener('click', function () {
+                markFilterInteracted('enhancement_tile');
+            });
+        });
 
         // ---------- state ----------
         var likedDigits = new Set(['0']);   // ค่าเริ่มต้นตามดีไซน์: เลข 0 ถูกเลือกเป็น "เลขที่ชอบ" ไว้ก่อน
